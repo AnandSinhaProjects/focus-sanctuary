@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(osascript:*)",
+      "Bash(screencapture -x /tmp/focus-app2.png)",
+      "Bash(open:*)",
+      "Bash(cat dist/assets/index-*.css)"
+    ]
+  }
+}

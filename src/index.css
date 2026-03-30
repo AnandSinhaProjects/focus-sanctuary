@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tell Tailwind v4 to scan these source files */
+@source "../src/**/*.jsx";
+@source "../index.html";
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Page background ──────────────────────────────────────────── */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #EEF3FA;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+html.dark body { background-color: #0F172A; }
+
+#root { width: 100%; min-height: 100vh; }
+
+/* ── Main two-column layout ───────────────────────────────────── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 1024px) {
+  .main-grid { grid-template-columns: 2fr 3fr; }
+}
+
+/* Mobile: timer on top, left panel below */
+.left-col  { order: 2; }
+.right-col { order: 1; }
+
+@media (min-width: 1024px) {
+  .left-col  { order: 1; }
+  .right-col { order: 2; }
+}
+
+.left-panel { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Mobile task drawer ───────────────────────────────────────── */
+.task-drawer-backdrop {
+  position: fixed; inset: 0; z-index: 80;
+  background: rgba(15,23,42,0.45);
+}
+.task-drawer {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  border-radius: 20px 20px 0 0;
+  max-height: 75vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.drawer-handle {
+  width: 36px; height: 4px; border-radius: 99px;
+  background: #CBD5E1; margin: 12px auto 0;
+  flex-shrink: 0;
+}
+
+/* Hide drawer toggle on desktop */
+.mobile-only { display: flex; }
+@media (min-width: 1024px) { .mobile-only { display: none !important; } }
+
+/* Hide left-panel tasks on mobile (shown in drawer instead) */
+.desktop-tasks { display: none; }
+@media (min-width: 1024px) { .desktop-tasks { display: flex; flex-direction: column; flex: 1; min-height: 400px; } }
+
+/* ── White card ───────────────────────────────────────────────── */
+.app-card {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+}
+html.dark .app-card {
+  background-color: #1E293B;
+  border-color: rgba(255,255,255,0.07);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+}
+
+/* ── Circular icon button ─────────────────────────────────────── */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid #E2E8F0;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.icon-btn:hover { background: #F1F5F9; }
+html.dark .icon-btn { border-color: rgba(255,255,255,0.12); }
+html.dark .icon-btn:hover { background: rgba(255,255,255,0.08); }
+
+/* ── Modal ────────────────────────────────────────────────────── */
+.modal-card {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+}
+html.dark .modal-card {
+  background-color: #1E293B;
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* ── Range input ──────────────────────────────────────────────── */
+input[type="range"] { accent-color: #3B82F6; }
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
+html.dark ::-webkit-scrollbar-thumb { background: #334155; }
